@@ -278,11 +278,5 @@ Item {
         height: 29
         text: qsTr("Borrow")
     }
-
-
-
-
-
-
 }
 

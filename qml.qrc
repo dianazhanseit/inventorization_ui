@@ -4,5 +4,6 @@
         <file>qtquickcontrols2.conf</file>
         <file>MyPage.qml</file>
         <file>DaVinciLab.qml</file>
+        <file>LoginPage.qml</file>
     </qresource>
 </RCC>
