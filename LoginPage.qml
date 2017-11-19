@@ -94,7 +94,7 @@ Item {
                     checkable: false
                     checked: true
                     highlighted: true
-                    onClicked: stack.push([this, mypage])
+                    onClicked: stack.push([mypage])
                 }
             }
         }
