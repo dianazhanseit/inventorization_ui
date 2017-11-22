@@ -54,24 +54,24 @@ Item {
                 height: 69
                 source: "qrc:/qtquickplugin/images/template_image.png"
 
-                    property bool rounded: true
-                    property bool adapt: true
+                property bool rounded: true
+                property bool adapt: true
 
-                    layer.enabled: rounded
-                    layer.effect: OpacityMask {
-                        maskSource: Item {
-                            width: img.width
-                            height: img.height
-                            Rectangle {
-                                anchors.centerIn: parent
-                                width: img.adapt ? img.width : Math.min(img.width, img.height)
-                                height: img.adapt ? img.height : width
-                                radius: Math.min(width, height)
-                            }
+                layer.enabled: rounded
+                layer.effect: OpacityMask {
+                    maskSource: Item {
+                        width: img.width
+                        height: img.height
+                        Rectangle {
+                            anchors.centerIn: parent
+                            width: img.adapt ? img.width : Math.min(img.width,
+                                                                    img.height)
+                            height: img.adapt ? img.height : width
+                            radius: Math.min(width, height)
                         }
                     }
                 }
-
+            }
 
             Text {
                 id: text1
@@ -98,7 +98,6 @@ Item {
             }
         }
 
-
         Rectangle {
             id: rdaVinci
             x: 0
@@ -107,7 +106,6 @@ Item {
             height: 68
             color: "#4da194"
             visible: false
-
         }
 
         Rectangle {
@@ -160,8 +158,6 @@ Item {
             text: qsTr("APPLICATION")
             font.pixelSize: 24
         }
-
-
     }
 
     Label {
@@ -263,8 +259,8 @@ Item {
         width: 962
         height: 200
     }
-    Item {
-        Button {
+
+    Button {
         id: edit
         x: 374
         y: 385
@@ -281,9 +277,7 @@ Item {
         checkable: false
         activeFocusOnTab: true
         bottomPadding: 0.1
-        onClicked: fileDialog.open();
-
-        }
+        onClicked: fileDialog.open()
     }
 
     function openFile(fileUrl) {
@@ -291,9 +285,8 @@ Item {
         request.open("GET", fileUrl, false)
         request.send(null)
         return request.responseText
-
     }
-    FileDialog{
+    FileDialog {
         id: fileDialog
         title: "Please choose the file"
         folder: shortcuts.home
@@ -306,10 +299,4 @@ Item {
         y: 334
         text: qsTr("Button")
     }
-
-
-
-
-
 }
-
