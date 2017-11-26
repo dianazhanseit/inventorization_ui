@@ -27,21 +27,11 @@ Item {
             anchors.top: parent.top
         }
 
-        GroupBox {
-            id: groupBox
-            x: 482
-            y: 176
-            width: 396
-            height: 368
-            opacity: 1
-            clip: false
-            visible: true
-            title: qsTr("")
 
             Rectangle {
                 id: rectangle
-                x: -10
-                y: -5
+                x: 483
+                y: 176
                 width: 394
                 height: 367
                 color: "#4e4d4d"
@@ -57,6 +47,17 @@ Item {
                     height: 182
                     color: "#ffffff"
 
+                    Text {
+                        id: text1
+                        x: 111
+                        y: 45
+                        color: "#e60b0b"
+                        text: qsTr("Invalid login or password")
+                        font.bold: true
+                        font.family: "Times New Roman"
+                        font.pixelSize: 16
+                    }
+
                 }
                 Rectangle {
                     id: rectangle2
@@ -71,7 +72,7 @@ Item {
                 TextField {
                     id: textField
                     x: 78
-                    y: 144
+                    y: 164
                     width: 238
                     height: 40
                     text: qsTr("Text Field")
@@ -80,7 +81,7 @@ Item {
                 TextField {
                     id: textField1
                     x: 78
-                    y: 214
+                    y: 225
                     width: 238
                     height: 40
                     text: qsTr("Text Field")
@@ -96,7 +97,16 @@ Item {
                     highlighted: true
                     onClicked: stack.push([mypage])
                 }
+
+                Image {
+                    id: image
+                    x: 159
+                    y: 53
+                    width: 76
+                    height: 76
+                    source: "qrc:/qtquickplugin/images/template_image.png"
+                }
             }
         }
     }
-}
+

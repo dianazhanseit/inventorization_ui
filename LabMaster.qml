@@ -14,7 +14,6 @@ Item {
     id: myPage
     width: 1360
     height: 720
-    property alias mouseArea: mouseArea
     visible: true
     transformOrigin: Item.Center
 
@@ -55,24 +54,24 @@ Item {
                 height: 69
                 source: "qrc:/qtquickplugin/images/template_image.png"
 
-                property bool rounded: true
-                property bool adapt: true
+                    property bool rounded: true
+                    property bool adapt: true
 
-                layer.enabled: rounded
-                layer.effect: OpacityMask {
-                    maskSource: Item {
-                        width: img.width
-                        height: img.height
-                        Rectangle {
-                            anchors.centerIn: parent
-                            width: img.adapt ? img.width : Math.min(img.width,
-                                                                    img.height)
-                            height: img.adapt ? img.height : width
-                            radius: Math.min(width, height)
+                    layer.enabled: rounded
+                    layer.effect: OpacityMask {
+                        maskSource: Item {
+                            width: img.width
+                            height: img.height
+                            Rectangle {
+                                anchors.centerIn: parent
+                                width: img.adapt ? img.width : Math.min(img.width, img.height)
+                                height: img.adapt ? img.height : width
+                                radius: Math.min(width, height)
+                            }
                         }
                     }
                 }
-            }
+
 
             Text {
                 id: text1
@@ -93,11 +92,12 @@ Item {
                 width: 80
                 height: 19
                 color: "#ffffff"
-                text: qsTr("STUDENT NAME")
+                text: qsTr("MASTER NAME")
                 font.family: "Tahoma"
                 font.pixelSize: 16
             }
         }
+
 
         Rectangle {
             id: rdaVinci
@@ -105,16 +105,9 @@ Item {
             y: 182
             width: 233
             height: 68
-            color: "#171918"
-            visible: true
-            MouseArea{
-                id: mouseArea
-                width: parent.width
-                height: parent.height
-                visible: true
-                enabled: true
-                onClicked: stack.push([daVinci])
-            }
+            color: "#4da194"
+            visible: false
+
         }
 
         Rectangle {
@@ -123,32 +116,28 @@ Item {
             y: 251
             width: 233
             height: 68
-            color: "#171918"
-            visible: true
-            MouseArea{
-                width: parent.width
-                height: parent.height
-                visible: true
-                enabled: true
-                onClicked: stack.push([newton])
-            }
+            color: "#4da194"
+            visible: false
         }
-
+        
         Rectangle {
             id: rEinstein
             x: 0
             y: 320
             width: 233
             height: 68
-            color: "#171918"
-            visible: true
-            MouseArea{
-                width: parent.width
-                height: parent.height
-                visible: true
-                enabled: true
-                onClicked: stack.push([einstein])
-            }
+            color: "#4da194"
+            visible: false
+        }
+        
+        Rectangle {
+            id: rEinstein1
+            x: 0
+            y: 387
+            width: 233
+            height: 68
+            color: "#4da194"
+            visible: false
         }
     }
 
@@ -181,6 +170,8 @@ Item {
             text: qsTr("APPLICATION")
             font.pixelSize: 24
         }
+
+
     }
 
     Label {
@@ -282,8 +273,8 @@ Item {
         width: 962
         height: 200
     }
-
-    Button {
+    Item {
+        Button {
         id: edit
         x: 374
         y: 385
@@ -300,7 +291,9 @@ Item {
         checkable: false
         activeFocusOnTab: true
         bottomPadding: 0.1
-        onClicked: fileDialog.open()
+        onClicked: fileDialog.open();
+
+        }
     }
 
     function openFile(fileUrl) {
@@ -308,18 +301,42 @@ Item {
         request.open("GET", fileUrl, false)
         request.send(null)
         return request.responseText
+        
     }
-    FileDialog {
+    FileDialog{
         id: fileDialog
         title: "Please choose the file"
         folder: shortcuts.home
         onAccepted: stimg.image = openFile(fileDialog.fileUrl)
     }
-
+    
     Button {
         id: br
         x: 910
         y: 334
         text: qsTr("Button")
     }
+    
+    Label {
+        id: daVinci3
+        x: 51
+        y: 414
+        width: 132
+        height: 24
+        color: "#ffffff"
+        text: qsTr("STUDENTS")
+        font.family: "Tahoma"
+        wrapMode: Text.WrapAnywhere
+        topPadding: 0.2
+        textFormat: Text.AutoText
+        renderType: Text.NativeRendering
+        fontSizeMode: Text.HorizontalFit
+        elide: Text.ElideLeft
+    }
+
+
+
+
+
 }
+
