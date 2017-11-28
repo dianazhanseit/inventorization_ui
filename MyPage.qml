@@ -9,6 +9,7 @@ import QtQuick.Templates 2.2
 import QtQuick.Extras 1.4
 import QtTest 1.2
 import QtQuick.Dialogs 1.0
+import com.info 1.0
 
 Item {
     id: myPage
@@ -17,6 +18,23 @@ Item {
     property alias mouseArea: mouseArea
     visible: true
     transformOrigin: Item.Center
+
+    PersonInfoServer
+    {
+        id: personServer
+        personID: loginInfo.personID
+        password: loginInfo.personPassword
+        Component.onCompleted: {
+            avatarSmall.source = avatarFile
+            fullNameLabel.text = firstName + " " + lastName
+            schoolLabel.text = schoolLabel.text + school
+            homePageAvatar.source = avatarFile
+            firstNameLabel.text = firstNameLabel.text + firstName
+            lastNameLabel.text = lastNameLabel.text + lastName
+
+
+        }
+    }
 
     Rectangle {
         id: rectangle
@@ -40,7 +58,7 @@ Item {
         visible: true
 
         Rectangle {
-            id: rMyPage
+            id: homeRect
             x: 0
             y: 77
             width: 233
@@ -48,12 +66,12 @@ Item {
             color: "#4da194"
 
             Image {
-                id: icon
+                id: avatarSmall
                 x: 12
                 y: 18
                 width: 72
                 height: 69
-                source: "qrc:/qtquickplugin/images/template_image.png"
+                source: Qt.resolvedUrl(personServer.avatarFile)
 
                 property bool rounded: true
                 property bool adapt: true
@@ -61,13 +79,14 @@ Item {
                 layer.enabled: rounded
                 layer.effect: OpacityMask {
                     maskSource: Item {
-                        width: img.width
-                        height: img.height
+                        width: avatarSmall.width
+                        height: avatarSmall.height
                         Rectangle {
                             anchors.centerIn: parent
-                            width: img.adapt ? img.width : Math.min(img.width,
-                                                                    img.height)
-                            height: img.adapt ? img.height : width
+                            width: avatarSmall.adapt ? avatarSmall.width : Math.min(
+                                                           avatarSmall.width,
+                                                           avatarSmall.height)
+                            height: avatarSmall.adapt ? avatarSmall.height : width
                             radius: Math.min(width, height)
                         }
                     }
@@ -75,7 +94,7 @@ Item {
             }
 
             Text {
-                id: text1
+                id: welcomeLabel
                 x: 101
                 y: 28
                 width: 59
@@ -86,14 +105,14 @@ Item {
                 font.pixelSize: 14
             }
 
-            TextEdit {
-                id: textEdit
+            Label {
+                id: fullNameLabel
                 x: 101
                 y: 56
                 width: 80
                 height: 19
                 color: "#ffffff"
-                text: qsTr("STUDENT NAME")
+                text: personServer.firstName + ' ' + personServer.lastName
                 font.family: "Tahoma"
                 font.pixelSize: 16
             }
@@ -107,7 +126,7 @@ Item {
             height: 68
             color: "#171918"
             visible: true
-            MouseArea{
+            MouseArea {
                 id: mouseArea
                 width: parent.width
                 height: parent.height
@@ -125,7 +144,7 @@ Item {
             height: 68
             color: "#171918"
             visible: true
-            MouseArea{
+            MouseArea {
                 width: parent.width
                 height: parent.height
                 visible: true
@@ -142,7 +161,7 @@ Item {
             height: 68
             color: "#171918"
             visible: true
-            MouseArea{
+            MouseArea {
                 width: parent.width
                 height: parent.height
                 visible: true
@@ -153,14 +172,14 @@ Item {
     }
 
     Rectangle {
-        id: rectangle2
+        id: logoRect
         x: 0
         y: 0
         width: 233
         height: 78
         color: "#343b41"
 
-        TextEdit {
+        Label {
             id: lab
             x: 13
             y: 22
@@ -171,7 +190,7 @@ Item {
             font.pixelSize: 24
         }
 
-        TextEdit {
+        Label {
             id: lab1
             x: 66
             y: 22
@@ -234,92 +253,157 @@ Item {
         font.family: "Tahoma"
     }
 
-    Image {
-        id: stimg
-        x: 320
-        y: 132
-        width: 240
-        height: 240
-        source: "qrc:/qtquickplugin/images/template_image.png"
+    Rectangle {
+        x: 279
+        y: 108
+        width: 413
+        height: 330
+        color: "#ffffff"
+        radius: 0
+
+        GridLayout {
+            id: homePageLayout
+            anchors.fill: parent
+            width: parent.width
+            height: parent.height
+            rows: 3
+            columns: 2
+
+            //flow: GridLayout.LeftToRight
+            Image {
+                id: homePageAvatar
+                Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+                Layout.preferredHeight: 240
+                Layout.preferredWidth: 240
+                Layout.row: 1
+                Layout.column: 1
+                Layout.rowSpan: 3
+            }
+
+            Label {
+                id: firstNameLabel
+                width: 100
+                height: 25
+                text: "<b>First Name: </b>"
+                Layout.minimumHeight: 25
+                Layout.minimumWidth: 150
+                Layout.preferredHeight: 25
+                Layout.preferredWidth: 150
+                font.family: "Times New Roman"
+                Layout.row: 1
+                Layout.column: 2
+            }
+
+            Label {
+                id: lastNameLabel
+                height: 25
+                text: "<b>Last Name</b>:  "
+                Layout.minimumWidth: 150
+                Layout.minimumHeight: 25
+                Layout.preferredWidth: 150
+                Layout.preferredHeight: 25
+                font.family: "Times New Roman"
+                font.pixelSize: 12
+                Layout.row: 2
+                Layout.column: 2
+            }
+
+            Label {
+                id: schoolLabel
+                height: 25
+                text: "<b>School: </b>"
+                Layout.minimumWidth: 70
+                Layout.minimumHeight: 25
+                Layout.preferredWidth: 70
+                Layout.preferredHeight: 25
+                font.family: "Times New Roman"
+                font.pixelSize: 12
+                Layout.row: 3
+                Layout.column: 2
+            }
+        }
     }
 
-    TextEdit {
-        id: name
-        x: 608
-        y: 150
-        width: 80
-        height: 20
-        text: qsTr("Name")
-        font.pixelSize: 16
+    ListView {
+        id: borrowedItemsList
+        x: 279
+        y: 500
+        width: 611
+        height: 192
+
+        Component.onCompleted: {
+
+        }
+
+        Component {
+            id: itemDelegate
+            Rectangle {
+                height: 90
+                width: 200
+
+                Column {
+                    Text {
+                        text: "<b>itemID: </b>" + itemID
+                    }
+                    Text {
+                        text: "<b>Item name: </b>" + itemName
+                    }
+                    Text {
+                        text: "<b>Lab name: </b>" + labName
+                    }
+                }
+            }
+        }
+
+        delegate: Repeater {
+            model: PersonInfoServer.borrowedItems
+            Rectangle {
+                height: 90
+                width: 200
+
+                Column {
+                    Text {
+                        text: "<b>itemID: </b>" + modelData[index]["itemID"]
+                    }
+                    Text {
+                        text: "<b>Item name: </b>" + modelData[index]["itemName"]
+                    }
+                    Text {
+                        text: "<b>Lab name: </b>" + modelData[index]["labName"]
+                    }
+                }
+            }
+        }
+
+        model: BorrowedItemModel{}
     }
 
-    TextEdit {
-        id: surname
-        x: 608
-        y: 196
-        width: 80
-        height: 20
-        text: qsTr("Name")
-        font.family: "Verdana"
-        font.pixelSize: 16
+    Label {
+        id: label
+        x: 279
+        y: 471
+        text: qsTr("Borrowed Item")
+        font.pointSize: 12
+        font.family: "Times New Roman"
     }
 
-    TextEdit {
-        id: major
-        x: 608
-        y: 242
-        width: 80
-        height: 20
-        text: qsTr("major")
-        font.pixelSize: 16
-        font.family: "Verdana"
-    }
+    //    function openFile(fileUrl) {
+    //        var request = new XMLHttpRequest
+    //        request.open("GET", fileUrl, false)
+    //        request.send(null)
+    //        return request.responseText
+    //    }
+    //    FileDialog {
+    //        id: fileDialog
+    //        title: "Please choose the file"
+    //        folder: shortcuts.home
+    //        onAccepted: stimg.image = openFile(fileDialog.fileUrl)
+    //    }
 
-    Item {
-        id: item2
-        x: 320
-        y: 463
-        width: 962
-        height: 200
-    }
-
-    Button {
-        id: edit
-        x: 374
-        y: 385
-        width: 132
-        height: 60
-        text: qsTr("edit")
-        highlighted: false
-        flat: false
-        down: false
-        checked: false
-        autoRepeat: false
-        autoExclusive: false
-        hoverEnabled: false
-        checkable: false
-        activeFocusOnTab: true
-        bottomPadding: 0.1
-        onClicked: fileDialog.open()
-    }
-
-    function openFile(fileUrl) {
-        var request = new XMLHttpRequest
-        request.open("GET", fileUrl, false)
-        request.send(null)
-        return request.responseText
-    }
-    FileDialog {
-        id: fileDialog
-        title: "Please choose the file"
-        folder: shortcuts.home
-        onAccepted: stimg.image = openFile(fileDialog.fileUrl)
-    }
-
-    Button {
-        id: br
-        x: 910
-        y: 334
-        text: qsTr("Button")
-    }
+    //    Button {
+    //        id: br
+    //        x: 910
+    //        y: 334
+    //        text: qsTr("Button")
+    //    }
 }
