@@ -3,6 +3,7 @@
 
 #include <QQuickItem>
 #include <QVariantList>
+#include <QTimer>
 
 class PersonInfoServer : public QQuickItem
 {
@@ -14,24 +15,28 @@ class PersonInfoServer : public QQuickItem
     Q_PROPERTY(QString personID READ getPersonID WRITE setPersonID NOTIFY personIDChanged)
     Q_PROPERTY(QString password READ getPassword WRITE setPassword NOTIFY passwordChanged)
     Q_PROPERTY(QVariantList borrowedItems READ getBorrowedItems NOTIFY borrowedItemsChanged)
+    Q_PROPERTY(QString labID READ getLabID WRITE setLabID NOTIFY labIDChanged)
     QString avatarFile;
     QString firstName;
     QString lastName;
     QString school;
     QString personID;
     QString password;
+    QString labID;
     QVariantList borrowedItems;
+    QTimer timer;
 public:
     PersonInfoServer(QQuickItem* parent = nullptr);
 
 signals:
-    void avatarFileChanged(QString newAvatarFile);
+    void avatarFileChanged();
     void firstNameChanged();
     void lastNameChanged();
     void schoolChanged();
     void personIDChanged();
     void passwordChanged();
     void borrowedItemsChanged();
+    void labIDChanged();
 
 public slots:
     QString getAvatarFile();
@@ -48,9 +53,9 @@ public slots:
     void setPassword(const QString& newPassword);
 
     QVariantList getBorrowedItems();
-//    QVariantMap getOneBorrowedItem();
 
-private:
+    QString getLabID();
+    void setLabID(const QString& newLabID);
     void loadBorrowedItems();
 };
 

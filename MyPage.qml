@@ -13,46 +13,14 @@ import com.info 1.0
 
 Item {
     id: myPage
-    width: 1360
-    height: 720
+    width: parent.width
+    height: parent.height
     visible: true
     transformOrigin: Item.Center
 
-    PersonInfoServer
-    {
-        id: personServer
-        personID: loginInfo.personID
-        password: loginInfo.personPassword
-        Component.onCompleted: {
-            avatarSmall.source = avatarFile
-            fullNameLabel.text = firstName + " " + lastName
-            schoolLabel.text = schoolLabel.text + school
-            homePageAvatar.source = avatarFile
-            firstNameLabel.text = firstNameLabel.text + firstName
-            lastNameLabel.text = lastNameLabel.text + lastName
-        }
-
-        onBorrowedItemsChanged: {
-            borrowedItemsModel.clear()
-            for (var i = 0; i < borrowedItems.length; ++i)
-            {
-                borrowedItemsModel.append(borrowedItems[i])
-            }
-        }
-    }
-
-    ListModel {
-        id: borrowedItemsModel
-        ListElement {
-            itemID: 12
-            itemName: "flamethrower"
-            labName: "swamp"
-        }
-    }
-
     Rectangle {
-        x: 279
-        y: 108
+        x: 0
+        y: 0
         width: 413
         height: 330
         color: "#ffffff"
@@ -66,7 +34,6 @@ Item {
             rows: 3
             columns: 2
 
-            //flow: GridLayout.LeftToRight
             Image {
                 id: homePageAvatar
                 Layout.alignment: Qt.AlignLeft | Qt.AlignTop
@@ -75,13 +42,14 @@ Item {
                 Layout.row: 1
                 Layout.column: 1
                 Layout.rowSpan: 3
+                source: personServer.avatarFile
             }
 
             Label {
                 id: firstNameLabel
                 width: 100
                 height: 25
-                text: "<b>First Name: </b>"
+                text: "<b>First Name: </b>" + personServer.lastName
                 Layout.minimumHeight: 25
                 Layout.minimumWidth: 150
                 Layout.preferredHeight: 25
@@ -94,7 +62,7 @@ Item {
             Label {
                 id: lastNameLabel
                 height: 25
-                text: "<b>Last Name</b>:  "
+                text: "<b>Last Name</b>: " + personServer.lastName
                 Layout.minimumWidth: 150
                 Layout.minimumHeight: 25
                 Layout.preferredWidth: 150
@@ -108,7 +76,7 @@ Item {
             Label {
                 id: schoolLabel
                 height: 25
-                text: "<b>School: </b>"
+                text: "<b>School: </b>" + personServer.school
                 Layout.minimumWidth: 70
                 Layout.minimumHeight: 25
                 Layout.preferredWidth: 70
@@ -121,90 +89,60 @@ Item {
         }
     }
 
-    ListView {
-        id: borrowedItemsList
-        x: 817
-        y: 168
-        width: 410
-        height: 192
+    ColumnLayout {
+        x: 450
+        y: 0
+        width: 420
+        height: 500
 
-        Component {
-            id: itemDelegate
-            Rectangle {
-                height: 90
-                width: 200
-
-                Column {
-                    property string fontName: "Times New Roman"
-                    property int fontSize: 12
-                    Text {
-                        font.family: fontName
-                        font.pixelSize: fontSize
-                        text: "<b>itemID: </b>" + itemID
-                    }
-                    Text {
-                        font.family: fontName
-                        font.pixelSize: fontSize
-                        text: "<b>Item name: </b>" + itemName
-                    }
-                    Text {
-                        font.family: fontName
-                        font.pixelSize: fontSize
-                        text: "<b>Lab name: </b>" + labName
-                    }
-                }
-            }
+        Label {
+            id: label
+            Layout.preferredHeight: 30
+            Layout.preferredWidth: 100
+            Layout.row: 1
+            text: qsTr("Borrowed Items")
+            font.pointSize: 12
+            font.family: "Times New Roman"
         }
 
-        delegate: itemDelegate /* Repeater {
-            model: PersonInfoServer.borrowedItems
-            Rectangle {
-                height: 90
-                width: 200
+        ListView {
+            id: borrowedItemsList
+            Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+            Layout.preferredWidth: 410
+            Layout.preferredHeight: 200
+            Layout.row: 2
+            Layout.rowSpan: 4
+            Component {
+                id: itemDelegate
+                Rectangle {
+                    height: 90
+                    width: 200
 
-                Column {
-                    Text {
-                        text: "<b>itemID: </b>" + modelData[index]["itemID"]
-                    }
-                    Text {
-                        text: "<b>Item name: </b>" + modelData[index]["itemName"]
-                    }
-                    Text {
-                        text: "<b>Lab name: </b>" + modelData[index]["labName"]
+                    Column {
+                        property string fontName: "Times New Roman"
+                        property int fontSize: 12
+                        Text {
+                            font.family: parent.fontName
+                            font.pixelSize: parent.fontSize
+                            text: "<b>itemID: </b>" + itemID
+                        }
+                        Text {
+                            font.family: parent.fontName
+                            font.pixelSize: parent.fontSize
+                            text: "<b>Item name: </b>" + itemName
+                        }
+                        Text {
+                            font.family: parent.fontName
+                            font.pixelSize: parent.fontSize
+                            text: "<b>Lab name: </b>" + labName
+                        }
                     }
                 }
             }
-        }*/
 
-        model: borrowedItemsModel
+            delegate: itemDelegate
+
+            model: borrowedItemsModel
+        }
     }
-
-    Label {
-        id: label
-        x: 817
-        y: 115
-        text: qsTr("Borrowed Items")
-        font.pointSize: 12
-        font.family: "Times New Roman"
-    }
-
-    //    function openFile(fileUrl) {
-    //        var request = new XMLHttpRequest
-    //        request.open("GET", fileUrl, false)
-    //        request.send(null)
-    //        return request.responseText
-    //    }
-    //    FileDialog {
-    //        id: fileDialog
-    //        title: "Please choose the file"
-    //        folder: shortcuts.home
-    //        onAccepted: stimg.image = openFile(fileDialog.fileUrl)
-    //    }
-
-    //    Button {
-    //        id: br
-    //        x: 910
-    //        y: 334
-    //        text: qsTr("Button")
-    //    }
 }

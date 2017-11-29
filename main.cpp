@@ -6,12 +6,14 @@
 
 #include "loginserver.h"
 #include "personinfoserver.h"
+#include "searchserver.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     qmlRegisterType<LoginServer>("com.login.credits", 1, 0, "LoginInfo");
     qmlRegisterType<PersonInfoServer>("com.info", 1, 0, "PersonInfoServer");
+    qmlRegisterType<searchServer>("com.searching", 1, 0, "SearchServer");
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;

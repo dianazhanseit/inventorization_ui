@@ -17,7 +17,8 @@ SOURCES += main.cpp \
     commonqueries.cpp \
     personinfoserver.cpp \
     borroweditemsserver.cpp \
-    borroweditemscontainer.cpp
+    borroweditemscontainer.cpp \
+    searchserver.cpp
 
 RESOURCES += qml.qrc
 
@@ -37,4 +38,5 @@ HEADERS += \
     commonqueries.h \
     personinfoserver.h \
     borroweditemsserver.h \
-    borroweditemscontainer.h
+    borroweditemscontainer.h \
+    searchserver.h

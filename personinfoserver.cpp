@@ -8,7 +8,10 @@
 PersonInfoServer::PersonInfoServer(QQuickItem* parent):
     QQuickItem(parent)
 {
-
+    timer.setSingleShot(false);
+    timer.setInterval(10000); //10 seconds
+    timer.start();
+    connect(&timer, SIGNAL(timeout()), this, SLOT(loadBorrowedItems()));
 }
 
 
@@ -51,7 +54,7 @@ void PersonInfoServer::setPersonID(const QString &newPersonID)
 //    }
     personID = newPersonID;
 
-    QSqlQuery infoRetrieveQuery(QString("SELECT photo, school, name, surname "
+    QSqlQuery infoRetrieveQuery(QString("SELECT photo, school, name, surname, lab_id "
                                         "FROM USER "
                                         "WHERE id=%1").arg(personID));
     if (!isSuccessfulQuery(infoRetrieveQuery))
@@ -64,7 +67,14 @@ void PersonInfoServer::setPersonID(const QString &newPersonID)
     school = infoRetrieveQuery.value(1).toString();
     firstName = infoRetrieveQuery.value(2).toString();
     lastName = infoRetrieveQuery.value(3).toString();
+    labID = infoRetrieveQuery.value(4).toString();
     loadBorrowedItems();
+
+    avatarFileChanged();
+    firstNameChanged();
+    lastNameChanged();
+    schoolChanged();
+    labIDChanged();
 }
 
 QString PersonInfoServer::getPassword()
@@ -92,6 +102,16 @@ void PersonInfoServer::setPassword(const QString &newPassword)
 QVariantList PersonInfoServer::getBorrowedItems()
 {
     return borrowedItems;
+}
+
+QString PersonInfoServer::getLabID()
+{
+    return labID;
+}
+
+void PersonInfoServer::setLabID(const QString &newLabID)
+{
+    labID = newLabID;
 }
 
 void PersonInfoServer::loadBorrowedItems()

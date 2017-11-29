@@ -4,8 +4,6 @@
         <file>qtquickcontrols2.conf</file>
         <file>MyPage.qml</file>
         <file>LoginPage.qml</file>
-        <file>DaVinci.qml</file>
-        <file>EinsteinLab.qml</file>
         <file>LabMaster.qml</file>
         <file>main.cpp</file>
         <file>Master_Students.qml</file>
@@ -15,7 +13,6 @@
         <file>sarah.png</file>
         <file>thomas.png</file>
         <file>BorrowedItemModel.qml</file>
-        <file>BorrowedItemDelegate.qml</file>
         <file>FindItemsPage.qml</file>
         <file>sideBar.qml</file>
         <file>CompositePage.qml</file>
