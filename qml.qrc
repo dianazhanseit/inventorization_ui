@@ -18,6 +18,6 @@
         <file>BorrowedItemDelegate.qml</file>
         <file>FindItemsPage.qml</file>
         <file>sideBar.qml</file>
-        <file>compositePage.qml</file>
+        <file>CompositePage.qml</file>
     </qresource>
 </RCC>

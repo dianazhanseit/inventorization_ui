@@ -124,7 +124,7 @@ Item {
                 loginInfo.submitLoginForm(personIDInput.text,
                                           passwordInput.text)
                 if (loginInfo.isLoggedIn()) {
-                    stack.push(mypage)
+                    stack.push(compositePage)
                     return
                 }
                 signInStatus.text = "<font color=\"red\">UserID and/or password is incorrect</font>"

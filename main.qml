@@ -32,9 +32,11 @@ ApplicationWindow {
 
     Component
     {
-        id: mypage
-        MyPage{}
+        id: compositePage
+        CompositePage {}
     }
+
+
 }
 
 

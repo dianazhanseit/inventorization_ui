@@ -1,9 +1,22 @@
 import QtQuick 2.0
+import QtGraphicalEffects 1.0
+import QtQuick.Layouts 1.3
+import QtQuick.Window 2.3
 import QtQuick.Controls 2.2
+import QtGraphicalEffects.private 1.0
+import Qt.labs.calendar 1.0
+import QtQuick.Templates 2.2
+import QtQuick.Extras 1.4
+import QtTest 1.2
+import QtQuick.Dialogs 1.0
+import com.info 1.0
 
 Item {
-    
-    
+    id: compositePage
+    width: 1360
+    height: 720
+    visible: true
+
     Rectangle {
         id: rectangle
         x: 0
@@ -220,4 +233,23 @@ Item {
         topPadding: 0.2
         font.family: "Tahoma"
     }
+
+    StackView {
+        x: 243
+        y: 100
+        width: parent.width - x
+        height: parent.height - y
+
+        initialItem: homePage
+    }
+
+    Component {
+        id: homePage
+        MyPage{}
+    }
+
+//    Component {
+//        id: findItems
+
+//    }
 }
