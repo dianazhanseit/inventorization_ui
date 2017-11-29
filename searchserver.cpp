@@ -20,25 +20,25 @@ void searchServer::searchByName(const QString& labID, const QString &name, bool 
     QString search;
     if (exactMatch && globalSearch)
     {
-        search = QString("SELECT ITEM.name, ITEM.id, LAB.name "
+        search = QString("SELECT DISTINCT ITEM.name, ITEM.id, LAB.name "
                          "FROM ITEM INNER JOIN LAB ON ITEM.lab_id = LAB.id "
                                    "LEFT OUTER JOIN BORROWING ON ITEM.id = BORROWING.item_id "
                          "WHERE ITEM.name=\"%1\" and (BORROWING.returned IS NULL OR BORROWING.returned = true)").arg(name);
     }
     else if (exactMatch && !globalSearch){
-        search = QString("SELECT ITEM.name, ITEM.id, LAB.name "
+        search = QString("SELECT DISTINCT ITEM.name, ITEM.id, LAB.name "
                          "FROM ITEM INNER JOIN LAB ON ITEM.lab_id = LAB.id "
                                    "LEFT OUTER JOIN BORROWING ON ITEM.id = BORROWING.item_id "
                          "WHERE ITEM.name = \"%1\" and (BORROWING.returned IS NULL OR BORROWING.returned = true) AND LAB.id = %2").arg(name, labID);
     }
     else if (!exactMatch && globalSearch) {
-        search = QString("SELECT ITEM.name, ITEM.id, LAB.name "
+        search = QString("SELECT DISTINCT ITEM.name, ITEM.id, LAB.name "
                          "FROM ITEM INNER JOIN LAB ON ITEM.lab_id = LAB.id "
                                    "LEFT OUTER JOIN BORROWING ON ITEM.id = BORROWING.item_id "
                          "WHERE ITEM.name LIKE (\"%%1%\") and (BORROWING.returned IS NULL OR BORROWING.returned = true)").arg(name);
     }
     else /* !exactMatch && !globalSearch */{
-        search = QString("SELECT ITEM.name, ITEM.id, LAB.name "
+        search = QString("SELECT DISTINCT ITEM.name, ITEM.id, LAB.name "
                          "FROM ITEM INNER JOIN LAB ON ITEM.lab_id = LAB.id "
                                    "LEFT OUTER JOIN BORROWING ON ITEM.id = BORROWING.item_id "
                          "WHERE ITEM.name LIKE (\"%%1%\") and (BORROWING.returned IS NULL OR BORROWING.returned = true) AND LAB.id = %2").arg(name, labID);

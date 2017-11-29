@@ -24,7 +24,7 @@ Item {
         width: parent.width - x
         height: parent.height - y
 
-        initialItem: homePage
+        initialItem: findItems
     }
 
     Component {
