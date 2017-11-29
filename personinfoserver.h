@@ -48,6 +48,7 @@ public slots:
     void setPassword(const QString& newPassword);
 
     QVariantList getBorrowedItems();
+//    QVariantMap getOneBorrowedItem();
 
 private:
     void loadBorrowedItems();

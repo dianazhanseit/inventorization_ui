@@ -108,6 +108,7 @@ void PersonInfoServer::loadBorrowedItems()
         throw std::runtime_error{findBorrowedItemsQuery.lastError().text().toStdString()};
     }
 
+    QVariantList newBorrowedItems;
     while (findBorrowedItemsQuery.next())
     {
         auto& query = findBorrowedItemsQuery;
@@ -115,8 +116,12 @@ void PersonInfoServer::loadBorrowedItems()
         map["itemID"] = query.value(0);
         map["itemName"] = query.value(1);
         map["labName"] = query.value(2);
-        borrowedItems.push_back(map);
+        newBorrowedItems.push_back(map);
     }
 
-    borrowedItemsChanged();
+    if (borrowedItems != newBorrowedItems)
+    {
+        borrowedItems = std::move(newBorrowedItems);
+        borrowedItemsChanged();
+    }
 }

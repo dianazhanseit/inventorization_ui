@@ -10,13 +10,14 @@
         <file>main.cpp</file>
         <file>Master_Students.qml</file>
         <file>MasterPage.qml</file>
-        <file>Newton.qml</file>
-        <file>lab.qml</file>
         <file>ashley.png</file>
         <file>peter.png</file>
         <file>sarah.png</file>
         <file>thomas.png</file>
         <file>BorrowedItemModel.qml</file>
         <file>BorrowedItemDelegate.qml</file>
+        <file>FindItemsPage.qml</file>
+        <file>sideBar.qml</file>
+        <file>compositePage.qml</file>
     </qresource>
 </RCC>

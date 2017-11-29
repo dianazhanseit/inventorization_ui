@@ -35,21 +35,6 @@ ApplicationWindow {
         id: mypage
         MyPage{}
     }
-    Component
-    {
-        id: daVinci
-        DaVinci{}
-    }
-    Component
-    {
-        id: einstein
-        EinsteinLab{}
-    }
-    Component
-    {
-        id: newton
-        Newton{}
-    }
 }
 
 

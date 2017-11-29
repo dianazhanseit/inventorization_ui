@@ -50,8 +50,6 @@ Item {
         }
     }
 
-    sideBar{}
-
     Rectangle {
         x: 279
         y: 108
