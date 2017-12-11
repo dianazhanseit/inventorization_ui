@@ -13,8 +13,8 @@ import com.info 1.0
 
 Item {
     id: compositePage
-    width: 1360
-    height: 720
+    width: parent.width
+    height: parent.height
     visible: true
 
     StackView {
@@ -64,20 +64,20 @@ Item {
                 width: 47
                 height: 33
                 color: "#ffffff"
-                text: qsTr("LAB")
+                text: "<font color=\"#ffffff\">LAB</font> <font color=\"#64cc6b\">APPLICATION</font>"
                 font.pixelSize: 24
             }
 
-            Label {
-                id: lab1
-                x: 66
-                y: 22
-                width: 47
-                height: 33
-                color: "#64cc6b"
-                text: qsTr("APPLICATION")
-                font.pixelSize: 24
-            }
+//            Label {
+//                id: lab1
+//                x: 66
+//                y: 22
+//                width: 47
+//                height: 33
+//                color: "#64cc6b"
+//                text: qsTr("APPLICATION")
+//                font.pixelSize: 24
+//            }
         }
     }
 
