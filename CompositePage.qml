@@ -29,18 +29,20 @@ Item {
 
     Component {
         id: homePage
-        MyPage {}
+        MyPage {
+        }
     }
 
     Component {
         id: findItems
-        FindItemsPage {}
+        FindItemsPage {
+        }
     }
-
 
     Rectangle {
         id: headerBar
         x: 0
+        y: 0
         width: parent.width
         height: 80
         color: "#2f475f"
@@ -48,39 +50,25 @@ Item {
         anchors.rightMargin: -6
         anchors.top: parent.top
         anchors.topMargin: 0
-
-        Rectangle {
-            id: logoRect
-            x: 0
-            y: 0
-            width: 233
-            height: 78
-            color: "#343b41"
-
-            Label {
-                id: lab
-                x: 13
-                y: 22
-                width: 47
-                height: 33
-                color: "#ffffff"
-                text: "<font color=\"#ffffff\">LAB</font> <font color=\"#64cc6b\">APPLICATION</font>"
-                font.pixelSize: 24
-            }
-
-//            Label {
-//                id: lab1
-//                x: 66
-//                y: 22
-//                width: 47
-//                height: 33
-//                color: "#64cc6b"
-//                text: qsTr("APPLICATION")
-//                font.pixelSize: 24
-//            }
-        }
     }
 
+    Rectangle {
+        id: logoRect
+        x: 0
+        y: 0
+        width: 235
+        height: 80
+        color: "#343b41"
+
+        Label {
+            id: logoText
+            x: (parent.width - width) / 2
+            y: (parent.height - height) / 2
+            color: "#ffffff"
+            text: "<font color=\"#ffffff\">LAB</font> <font color=\"#64cc6b\">APPLICATION</font>"
+            font.pixelSize: 24
+        }
+    }
 
     Rectangle {
         id: sideMenu
@@ -186,8 +174,6 @@ Item {
             }
         }
     }
-
-
 
     PersonInfoServer {
         id: personServer
