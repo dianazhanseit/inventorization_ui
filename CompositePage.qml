@@ -16,11 +16,13 @@ Item {
     width: parent.width
     height: parent.height
     visible: true
+    property int sidebarWidth: 235
+    property int headerHeight: 80
 
     StackView {
         id: pageSpaceStack
-        x: 243
-        y: 100
+        x: sidebarWidth
+        y: headerHeight
         width: parent.width - x
         height: parent.height - y
 
@@ -44,7 +46,7 @@ Item {
         x: 0
         y: 0
         width: parent.width
-        height: 80
+        height: headerHeight
         color: "#2f475f"
         anchors.right: parent.right
         anchors.rightMargin: -6
@@ -56,8 +58,8 @@ Item {
         id: logoRect
         x: 0
         y: 0
-        width: 235
-        height: 80
+        width: sidebarWidth
+        height: headerHeight
         color: "#343b41"
 
         Label {
@@ -73,73 +75,73 @@ Item {
     Rectangle {
         id: sideMenu
         x: 0
-        y: 75
-        width: 233
-        height: 720
+        y: headerHeight
+        width: sidebarWidth
+        height: parent.height - 75
         color: "#171918"
         ColumnLayout {
             anchors.top: parent.top
             width: parent.width
             height: 200
 
-            Rectangle {
-                id: homeRect
-                Layout.preferredWidth: 233
-                Layout.preferredHeight: 105
-                color: "#4da194"
+//            Rectangle {
+//                id: homeRect
+//                Layout.preferredWidth: sidebarWidth
+//                Layout.preferredHeight: 105
+//                color: "#4da194"
 
-                Image {
-                    id: avatarSmall
-                    x: 12
-                    y: 18
-                    width: 72
-                    height: 69
-                    source: Qt.resolvedUrl(personServer.avatarFile)
+//                Image {
+//                    id: avatarSmall
+//                    x: 12
+//                    y: 18
+//                    width: 72
+//                    height: 69
+//                    source: Qt.resolvedUrl(personServer.avatarFile)
 
-                    property bool rounded: true
-                    property bool adapt: true
+//                    property bool rounded: true
+//                    property bool adapt: true
 
-                    layer.enabled: rounded
-                    layer.effect: OpacityMask {
-                        maskSource: Item {
-                            width: avatarSmall.width
-                            height: avatarSmall.height
-                            Rectangle {
-                                anchors.centerIn: parent
-                                width: avatarSmall.adapt ? avatarSmall.width : Math.min(
-                                                               avatarSmall.width,
-                                                               avatarSmall.height)
-                                height: avatarSmall.adapt ? avatarSmall.height : width
-                                radius: Math.min(width, height)
-                            }
-                        }
-                    }
-                }
+//                    layer.enabled: rounded
+//                    layer.effect: OpacityMask {
+//                        maskSource: Item {
+//                            width: avatarSmall.width
+//                            height: avatarSmall.height
+//                            Rectangle {
+//                                anchors.centerIn: parent
+//                                width: avatarSmall.adapt ? avatarSmall.width : Math.min(
+//                                                               avatarSmall.width,
+//                                                               avatarSmall.height)
+//                                height: avatarSmall.adapt ? avatarSmall.height : width
+//                                radius: Math.min(width, height)
+//                            }
+//                        }
+//                    }
+//                }
 
-                Text {
-                    id: welcomeLabel
-                    x: 101
-                    y: 28
-                    width: 59
-                    height: 16
-                    color: "#171918"
-                    text: qsTr("Welcome")
-                    font.family: "Tahoma"
-                    font.pixelSize: 14
-                }
+//                Text {
+//                    id: welcomeLabel
+//                    x: 101
+//                    y: 28
+//                    width: 59
+//                    height: 16
+//                    color: "#171918"
+//                    text: qsTr("Welcome")
+//                    font.family: "Tahoma"
+//                    font.pixelSize: 14
+//                }
 
-                Label {
-                    id: fullNameLabel
-                    x: 101
-                    y: 56
-                    width: 80
-                    height: 19
-                    color: "#ffffff"
-                    text: personServer.firstName + ' ' + personServer.lastName
-                    font.family: "Tahoma"
-                    font.pixelSize: 16
-                }
-            }
+//                Label {
+//                    id: fullNameLabel
+//                    x: 101
+//                    y: 56
+//                    width: 80
+//                    height: 19
+//                    color: "#ffffff"
+//                    text: personServer.firstName + ' ' + personServer.lastName
+//                    font.family: "Tahoma"
+//                    font.pixelSize: 16
+//                }
+//            }
 
             Rectangle {
                 id: rfindItems
